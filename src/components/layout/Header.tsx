@@ -1,20 +1,27 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Menu, X, Heart, Search, User } from "lucide-react";
+import { ShoppingBag, Menu, X, Heart, Search, User, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isProductsOpen, setIsProductsOpen] = useState(false);
   const { cartItems } = useCart();
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  const navLinks = [
-    { name: "Inicio", href: "/" },
+  const productSubLinks = [
+    { name: "Todos", href: "/categoria/todos" },
     { name: "Tops", href: "/categoria/tops" },
     { name: "Leggings", href: "/categoria/leggings" },
     { name: "Sets", href: "/categoria/sets" },
     { name: "Accesorios", href: "/categoria/accesorios" },
+  ];
+
+  const navLinks = [
+    { name: "Inicio", href: "/" },
+    { name: "Tips", href: "/tips" },
+    { name: "Recetas", href: "/recetas" },
   ];
 
   return (
@@ -43,7 +50,48 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
+            <Link
+              to="/"
+              className="font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300"
+            >
+              Inicio
+            </Link>
+
+            {/* Productos Dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsProductsOpen(true)}
+              onMouseLeave={() => setIsProductsOpen(false)}
+            >
+              <button className="flex items-center gap-1 font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300">
+                Productos
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`} />
+              </button>
+
+              <AnimatePresence>
+                {isProductsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg overflow-hidden z-50"
+                  >
+                    {productSubLinks.map((link) => (
+                      <Link
+                        key={link.name}
+                        to={link.href}
+                        className="block px-4 py-3 font-body text-sm text-foreground/80 hover:bg-accent/10 hover:text-accent transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
+            {navLinks.slice(1).map((link) => (
               <Link
                 key={link.name}
                 to={link.href}
@@ -91,22 +139,60 @@ const Header = () => {
             className="lg:hidden bg-background border-t border-border overflow-hidden"
           >
             <nav className="container mx-auto px-4 py-6 flex flex-col gap-4">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
+              <Link
+                to="/"
+                onClick={() => setIsMenuOpen(false)}
+                className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
+              >
+                Inicio
+              </Link>
+
+              {/* Mobile Productos Section */}
+              <div>
+                <button
+                  onClick={() => setIsProductsOpen(!isProductsOpen)}
+                  className="flex items-center gap-2 font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors w-full"
                 >
-                  <Link
-                    to={link.href}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </motion.div>
-              ))}
+                  Productos
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`} />
+                </button>
+                <AnimatePresence>
+                  {isProductsOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="pl-4 mt-2 flex flex-col gap-2"
+                    >
+                      {productSubLinks.map((link) => (
+                        <Link
+                          key={link.name}
+                          to={link.href}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="block font-body text-base text-foreground/70 hover:text-accent transition-colors py-1"
+                        >
+                          {link.name}
+                        </Link>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <Link
+                to="/tips"
+                onClick={() => setIsMenuOpen(false)}
+                className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
+              >
+                Tips
+              </Link>
+              <Link
+                to="/recetas"
+                onClick={() => setIsMenuOpen(false)}
+                className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
+              >
+                Recetas
+              </Link>
             </nav>
           </motion.div>
         )}
