@@ -19,34 +19,24 @@ const Hero = () => {
       {/* Content */}
       <div className="relative container mx-auto px-4 lg:px-8 pt-20">
         <div className="max-w-2xl">
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="font-body font-light text-sm lg:text-base uppercase tracking-[0.3em] text-secondary mb-4"
-          >
-            Nueva Colección 2025
-          </motion.p>
-
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="font-display text-4xl md:text-5xl lg:text-7xl text-primary-foreground leading-tight mb-6"
+            transition={{ duration: 0.6 }}
+            className="font-display text-3xl md:text-4xl lg:text-6xl text-primary-foreground leading-tight mb-6"
           >
-            ENTRENA
-            <br />
-            <span className="text-gradient">CON ESTILO</span>
+            Ropa deportiva creada desde la experiencia de{" "}
+            <span className="text-gradient">entrenar cuerpos reales.</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="font-body font-light text-lg lg:text-xl text-primary-foreground/90 mb-8 max-w-lg"
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="font-body font-light text-lg lg:text-xl text-primary-foreground/90 mb-8 max-w-xl"
           >
-            Descubre ropa deportiva diseñada para mujeres que se atreven a brillar. 
-            Comodidad, estilo y empoderamiento en cada prenda.
+            Entrenamiento, movimiento y prendas pensadas para acompañarte en tu proceso, 
+            no solo para verte bien, sino para sentirte fuerte.
           </motion.p>
 
           <motion.div
@@ -56,11 +46,11 @@ const Hero = () => {
             className="flex flex-col sm:flex-row gap-4"
           >
             <Link to="/categoria/todos" className="btn-cta group">
-              Explorar Colección
+              Ver colección
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/categoria/sets" className="btn-outline-brand border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              Ver Sets
+            <Link to="/entrenamiento" className="btn-outline-brand border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              Entrena conmigo
             </Link>
           </motion.div>
         </div>
