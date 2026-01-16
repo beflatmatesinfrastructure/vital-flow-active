@@ -49,7 +49,7 @@ const Hero = () => {
               Ver colección
               <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
-            <Link to="/entrenamiento" className="btn-outline-brand border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+            <Link to="/entrena-conmigo" className="btn-outline-brand border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
               Entrena conmigo
             </Link>
           </motion.div>

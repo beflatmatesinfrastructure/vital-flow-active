@@ -91,6 +91,13 @@ const Header = () => {
               </AnimatePresence>
             </div>
 
+            <Link
+              to="/entrena-conmigo"
+              className="font-body font-light text-sm uppercase tracking-widest text-accent hover:text-accent/80 transition-colors duration-300"
+            >
+              Entrena conmigo
+            </Link>
+
             {navLinks.slice(1).map((link) => (
               <Link
                 key={link.name}
@@ -178,6 +185,14 @@ const Header = () => {
                   )}
                 </AnimatePresence>
               </div>
+
+              <Link
+                to="/entrena-conmigo"
+                onClick={() => setIsMenuOpen(false)}
+                className="block font-display text-lg uppercase tracking-wider text-accent hover:text-accent/80 transition-colors"
+              >
+                Entrena conmigo
+              </Link>
 
               <Link
                 to="/tips"
