@@ -17,8 +17,8 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="relative container mx-auto px-4 lg:px-8 pt-20">
-        <div className="max-w-2xl">
+      <div className="relative container mx-auto px-4 lg:px-8 flex items-center justify-center min-h-screen">
+        <div className="max-w-2xl text-center">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -33,7 +33,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            className="font-body font-light text-lg lg:text-xl text-primary-foreground/90 mb-8 max-w-xl"
+            className="font-body font-light text-lg lg:text-xl text-primary-foreground/90 mb-8 max-w-xl mx-auto"
           >
             Entrenamiento, movimiento y prendas pensadas para acompañarte en tu proceso, 
             no solo para verte bien, sino para sentirte fuerte.
@@ -43,7 +43,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4"
+            className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Link to="/categoria/todos" className="btn-cta group">
               Ver colección
