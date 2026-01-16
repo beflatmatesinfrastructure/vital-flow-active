@@ -1,9 +1,15 @@
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle, MapPin, Wifi } from "lucide-react";
+import { ArrowRight, CheckCircle, MapPin, Wifi, Compass, Info } from "lucide-react";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 
 const TrainingPage = () => {
+  const presencialPlans = [
+    { sessions: "8 sesiones / mes", price: "Desde $200.000 CLP" },
+    { sessions: "12 sesiones / mes", price: "Desde $250.000 CLP" },
+    { sessions: "16 sesiones / mes", price: "Desde $300.000 CLP" },
+  ];
+
   const presencialFeatures = [
     "Evaluación inicial",
     "Plan de entrenamiento personalizado",
@@ -12,8 +18,8 @@ const TrainingPage = () => {
   ];
 
   const onlineFeatures = [
-    "Plan de entrenamiento personalizado",
-    "Indicaciones claras y progresiones",
+    "Rutina personalizada",
+    "Indicaciones claras",
     "Seguimiento y ajustes",
   ];
 
@@ -65,122 +71,157 @@ const TrainingPage = () => {
         {/* Training Options */}
         <section className="py-12 lg:py-20 bg-muted/30">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="grid md:grid-cols-2 gap-8 lg:gap-12 max-w-5xl mx-auto">
+            <div className="grid lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              
               {/* Presencial */}
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="bg-background rounded-2xl p-8 lg:p-10 shadow-elegant border border-border"
+                className="bg-background rounded-2xl p-8 shadow-elegant border border-border flex flex-col"
               >
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
                     <MapPin className="w-6 h-6 text-primary" />
                   </div>
-                  <h2 className="font-display text-xl lg:text-2xl text-foreground">
-                    Entrenamiento personalizado presencial
+                  <h2 className="font-display text-lg lg:text-xl text-foreground">
+                    Entrenamiento Personalizado Presencial
                   </h2>
                 </div>
 
-                <p className="font-body font-light text-muted-foreground mb-6 leading-relaxed">
-                  Sesiones uno a uno, diseñadas según tu nivel, objetivos y condición física.
-                  <br /><br />
-                  Ideal si buscas un acompañamiento cercano, corrección técnica y un plan adaptado completamente a ti.
+                <p className="font-body font-light text-muted-foreground mb-6 leading-relaxed text-sm">
+                  El entrenamiento personalizado es una inversión en tu salud, tu cuerpo y tu proceso.
+                  Cada plan se adapta a tu nivel, objetivos y condición física.
                 </p>
 
-                <div className="mb-8">
-                  <p className="font-body font-medium text-foreground mb-4">Incluye:</p>
-                  <ul className="space-y-3">
+                <div className="mb-6">
+                  <p className="font-body font-medium text-foreground mb-3 text-sm">Planes mensuales:</p>
+                  <div className="space-y-3">
+                    {presencialPlans.map((plan, index) => (
+                      <div key={index} className="flex justify-between items-center py-2 border-b border-border/50 last:border-0">
+                        <span className="font-body text-sm text-foreground/80">{plan.sessions}</span>
+                        <span className="font-display text-sm text-accent">{plan.price}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-3 italic">
+                    *Los valores pueden variar según frecuencia y objetivos
+                  </p>
+                </div>
+
+                <div className="mb-6 flex-grow">
+                  <p className="font-body font-medium text-foreground mb-3 text-sm">Incluye:</p>
+                  <ul className="space-y-2">
                     {presencialFeatures.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                        <span className="font-body font-light text-foreground/80">{feature}</span>
+                      <li key={index} className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                        <span className="font-body font-light text-foreground/80 text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <a
-                  href="#contacto"
-                  className="btn-cta w-full justify-center group"
-                >
-                  Agendar evaluación
-                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
+                <div className="space-y-3">
+                  <a href="#contacto" className="btn-cta w-full justify-center group text-sm">
+                    Agendar evaluación
+                    <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                  <a href="#contacto" className="btn-outline-brand w-full justify-center text-sm">
+                    Solicitar información
+                  </a>
+                </div>
+
+                <div className="mt-4 flex items-start gap-2 p-3 bg-primary/5 rounded-lg">
+                  <Info className="w-4 h-4 text-primary flex-shrink-0 mt-0.5" />
+                  <p className="text-xs text-muted-foreground">
+                    La evaluación inicial es obligatoria para definir el plan adecuado.
+                  </p>
+                </div>
               </motion.div>
 
               {/* Online */}
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 }}
-                className="bg-background rounded-2xl p-8 lg:p-10 shadow-elegant border border-border"
+                className="bg-background rounded-2xl p-8 shadow-elegant border border-border flex flex-col"
               >
-                <div className="flex items-center gap-3 mb-6">
+                <div className="flex items-center gap-3 mb-4">
                   <div className="w-12 h-12 rounded-full bg-secondary/30 flex items-center justify-center">
                     <Wifi className="w-6 h-6 text-secondary-foreground" />
                   </div>
-                  <h2 className="font-display text-xl lg:text-2xl text-foreground">
-                    Entrenamiento online
+                  <h2 className="font-display text-lg lg:text-xl text-foreground">
+                    Entrenamiento Online
                   </h2>
                 </div>
 
-                <p className="font-body font-light text-muted-foreground mb-6 leading-relaxed">
-                  Para quienes quieren entrenar desde cualquier lugar, con una estructura clara y acompañamiento profesional.
-                  <br /><br />
-                  El plan se adapta a tu nivel, horarios y objetivos.
+                <p className="font-body font-light text-muted-foreground mb-6 leading-relaxed text-sm">
+                  Ideal si quieres entrenar desde cualquier lugar con una estructura clara y acompañamiento profesional.
                 </p>
 
-                <div className="mb-8">
-                  <p className="font-body font-medium text-foreground mb-4">Incluye:</p>
-                  <ul className="space-y-3">
+                <div className="mb-6">
+                  <div className="p-4 bg-accent/10 rounded-xl text-center">
+                    <p className="font-body text-sm text-foreground/80 mb-1">Plan mensual online</p>
+                    <p className="font-display text-2xl text-accent">Desde $150.000 CLP</p>
+                  </div>
+                </div>
+
+                <div className="mb-6 flex-grow">
+                  <p className="font-body font-medium text-foreground mb-3 text-sm">Incluye:</p>
+                  <ul className="space-y-2">
                     {onlineFeatures.map((feature, index) => (
-                      <li key={index} className="flex items-center gap-3">
-                        <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                        <span className="font-body font-light text-foreground/80">{feature}</span>
+                      <li key={index} className="flex items-center gap-2">
+                        <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
+                        <span className="font-body font-light text-foreground/80 text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <a
-                  href="#contacto"
-                  className="btn-outline-brand w-full justify-center group"
-                >
+                <a href="#contacto" className="btn-cta w-full justify-center group text-sm mt-auto">
                   Quiero entrenar online
                   <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </a>
               </motion.div>
-            </div>
-          </div>
-        </section>
 
-        {/* About Me */}
-        <section className="py-16 lg:py-24">
-          <div className="container mx-auto px-4 lg:px-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="max-w-3xl mx-auto"
-            >
-              <h2 className="font-display text-2xl lg:text-3xl text-foreground text-center mb-8">
-                Sobre <span className="text-gradient">mí</span>
-              </h2>
-              
-              <div className="bg-muted/30 rounded-2xl p-8 lg:p-12 border border-border">
-                <p className="font-body font-light text-lg text-foreground/90 leading-relaxed text-center">
-                  Soy <span className="font-medium text-primary">entrenadora, atleta y asesora de imagen</span>.
-                  <br /><br />
-                  Durante años he trabajado con personas reales, entendiendo que el cuerpo no se transforma desde la exigencia extrema, sino desde la constancia, el cuidado y el respeto.
-                  <br /><br />
-                  Desde esa experiencia nace esta marca: <span className="text-accent font-medium">ropa deportiva pensada para entrenar de verdad</span>, y servicios de entrenamiento diseñados para acompañar procesos reales.
+              {/* Asesorías */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="bg-background rounded-2xl p-8 shadow-elegant border border-border flex flex-col"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Compass className="w-6 h-6 text-accent" />
+                  </div>
+                  <h2 className="font-display text-lg lg:text-xl text-foreground">
+                    Asesorías / Planes
+                  </h2>
+                </div>
+
+                <p className="font-body font-light text-muted-foreground mb-6 leading-relaxed text-sm">
+                  Pensado para quienes necesitan orden, claridad y una guía profesional para comenzar o retomar el entrenamiento.
                 </p>
-              </div>
-            </motion.div>
+
+                <div className="mb-6">
+                  <div className="p-4 bg-accent/10 rounded-xl text-center">
+                    <p className="font-body text-sm text-foreground/80 mb-1">Asesoría personalizada</p>
+                    <p className="font-display text-2xl text-accent">Desde $85.000 CLP</p>
+                  </div>
+                </div>
+
+                <div className="flex-grow" />
+
+                <a href="#contacto" className="btn-outline-brand w-full justify-center group text-sm mt-auto">
+                  Ver opciones
+                  <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </motion.div>
+            </div>
           </div>
         </section>
 

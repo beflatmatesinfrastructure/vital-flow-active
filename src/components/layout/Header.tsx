@@ -1,27 +1,21 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingBag, Menu, X, Heart, Search, User, ChevronDown } from "lucide-react";
+import { ShoppingBag, Menu, X, ChevronDown } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isProductsOpen, setIsProductsOpen] = useState(false);
+  const [isCollectionOpen, setIsCollectionOpen] = useState(false);
   const { cartItems } = useCart();
   const cartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
-  const productSubLinks = [
+  const collectionSubLinks = [
     { name: "Todos", href: "/categoria/todos" },
     { name: "Tops", href: "/categoria/tops" },
     { name: "Leggings", href: "/categoria/leggings" },
     { name: "Sets", href: "/categoria/sets" },
     { name: "Accesorios", href: "/categoria/accesorios" },
-  ];
-
-  const navLinks = [
-    { name: "Inicio", href: "/" },
-    { name: "Tips", href: "/tips" },
-    { name: "Recetas", href: "/recetas" },
   ];
 
   return (
@@ -57,19 +51,19 @@ const Header = () => {
               Inicio
             </Link>
 
-            {/* Productos Dropdown */}
+            {/* Colección Dropdown */}
             <div
               className="relative"
-              onMouseEnter={() => setIsProductsOpen(true)}
-              onMouseLeave={() => setIsProductsOpen(false)}
+              onMouseEnter={() => setIsCollectionOpen(true)}
+              onMouseLeave={() => setIsCollectionOpen(false)}
             >
               <button className="flex items-center gap-1 font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300">
-                Productos
-                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`} />
+                Colección
+                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isCollectionOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
-                {isProductsOpen && (
+                {isCollectionOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -77,7 +71,7 @@ const Header = () => {
                     transition={{ duration: 0.2 }}
                     className="absolute top-full left-0 mt-2 w-48 bg-background border border-border rounded-lg shadow-lg overflow-hidden z-50"
                   >
-                    {productSubLinks.map((link) => (
+                    {collectionSubLinks.map((link) => (
                       <Link
                         key={link.name}
                         to={link.href}
@@ -98,28 +92,23 @@ const Header = () => {
               Entrena conmigo
             </Link>
 
-            {navLinks.slice(1).map((link) => (
-              <Link
-                key={link.name}
-                to={link.href}
-                className="font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300"
-              >
-                {link.name}
-              </Link>
-            ))}
+            <Link
+              to="/sobre-mi"
+              className="font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300"
+            >
+              Sobre mí
+            </Link>
+
+            <Link
+              to="/contacto"
+              className="font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300"
+            >
+              Contacto
+            </Link>
           </nav>
 
           {/* Right Icons */}
           <div className="flex items-center gap-3 lg:gap-4">
-            <button className="hidden lg:block p-2 hover:text-accent transition-colors" aria-label="Search">
-              <Search className="w-5 h-5" />
-            </button>
-            <button className="hidden lg:block p-2 hover:text-accent transition-colors" aria-label="Account">
-              <User className="w-5 h-5" />
-            </button>
-            <button className="hidden lg:block p-2 hover:text-accent transition-colors" aria-label="Wishlist">
-              <Heart className="w-5 h-5" />
-            </button>
             <Link to="/carrito" className="relative p-2 hover:text-accent transition-colors">
               <ShoppingBag className="w-5 h-5" />
               {cartCount > 0 && (
@@ -154,24 +143,24 @@ const Header = () => {
                 Inicio
               </Link>
 
-              {/* Mobile Productos Section */}
+              {/* Mobile Colección Section */}
               <div>
                 <button
-                  onClick={() => setIsProductsOpen(!isProductsOpen)}
+                  onClick={() => setIsCollectionOpen(!isCollectionOpen)}
                   className="flex items-center gap-2 font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors w-full"
                 >
-                  Productos
-                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isProductsOpen ? 'rotate-180' : ''}`} />
+                  Colección
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${isCollectionOpen ? 'rotate-180' : ''}`} />
                 </button>
                 <AnimatePresence>
-                  {isProductsOpen && (
+                  {isCollectionOpen && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
                       className="pl-4 mt-2 flex flex-col gap-2"
                     >
-                      {productSubLinks.map((link) => (
+                      {collectionSubLinks.map((link) => (
                         <Link
                           key={link.name}
                           to={link.href}
@@ -195,18 +184,19 @@ const Header = () => {
               </Link>
 
               <Link
-                to="/tips"
+                to="/sobre-mi"
                 onClick={() => setIsMenuOpen(false)}
                 className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
               >
-                Tips
+                Sobre mí
               </Link>
+
               <Link
-                to="/recetas"
+                to="/contacto"
                 onClick={() => setIsMenuOpen(false)}
                 className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
               >
-                Recetas
+                Contacto
               </Link>
             </nav>
           </motion.div>
