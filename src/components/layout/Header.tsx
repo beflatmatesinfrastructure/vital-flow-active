@@ -100,6 +100,13 @@ const Header = () => {
             </Link>
 
             <Link
+              to="/blog"
+              className="font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300"
+            >
+              Blog
+            </Link>
+
+            <Link
               to="/contacto"
               className="font-body font-light text-sm uppercase tracking-widest text-foreground/80 hover:text-accent transition-colors duration-300"
             >
@@ -189,6 +196,14 @@ const Header = () => {
                 className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
               >
                 Sobre mí
+              </Link>
+
+              <Link
+                to="/blog"
+                onClick={() => setIsMenuOpen(false)}
+                className="block font-display text-lg uppercase tracking-wider text-foreground hover:text-accent transition-colors"
+              >
+                Blog
               </Link>
 
               <Link
